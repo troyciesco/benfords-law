@@ -2,6 +2,8 @@
 
 This is a full stack application that allows users to upload datasets, calculate the frequency of each first digit in a column, and compare that calculation to Benford's law as a mixed line/bar graph and a pseudo-heatmap.
 
+Walkthrough: https://www.loom.com/share/dddc7ae8465d48febae8787bfd1d679d?sid=401ab479-3402-4436-bf60-83a9d6416fb7
+
 ## Quick Start/TLDR:
 
 1. Run docker on your local machine.
