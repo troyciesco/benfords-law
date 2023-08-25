@@ -1,0 +1,11 @@
+flask
+flask-smorest
+python-dotenv
+sqlalchemy
+flask-sqlalchemy
+flask-migrate
+gunicorn
+psycopg2-binary
+faker
+flask_cors
+pandas

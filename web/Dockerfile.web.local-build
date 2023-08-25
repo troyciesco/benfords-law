@@ -1,0 +1,15 @@
+FROM node:16-buster-slim as build-stage
+ENV NODE_ENV=production
+WORKDIR /frontend
+
+COPY package.json yarn.lock ./
+RUN yarn install --production=false
+COPY . .
+RUN yarn build
+
+FROM build-stage as production-stage
+ENV HOST=0.0.0.0
+ENV PORT=3001
+COPY --from=build-stage /frontend/.output /frontend/.output
+EXPOSE 3001
+CMD [ "node", ".output/server/index.mjs" ]

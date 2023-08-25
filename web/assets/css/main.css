@@ -1,0 +1,111 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-fallback: BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+    "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
+@layer base {
+  @font-face {
+    font-family: "Big Shoulders Inline Text";
+    src: url("/fonts/BigShouldersInlineText-Variable.ttf") format("truetype-variations");
+    font-weight: 100 1000;
+  }
+  
+  @font-face {
+    font-family: "Glacial Indifference";
+    src: url("/fonts/GlacialIndifference-Regular.woff") format("woff"),
+         url("/fonts/GlacialIndifference-Regular.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+  
+  @font-face {
+    font-family: "Glacial Indifference";
+    src: url("/fonts/GlacialIndifference-Bold.woff") format("woff"),
+         url("/fonts/GlacialIndifference-Bold.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+  
+  @font-face {
+    font-family: "Glacial Indifference";
+    src: url("/fonts/GlacialIndifference-Italic.woff") format("woff"),
+         url("/fonts/GlacialIndifference-Italic.woff2") format("woff2");
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+  }
+  
+  @font-face {
+    font-family: "Share Tech Mono";
+    src: url("/fonts/ShareTechMono-Regular.woff") format("woff"),
+         url("/fonts/ShareTechMono-Regular.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+}
+  
+body {
+  @apply bg-dark text-light;
+  font-family: "Glacial Indifference", var(--font-fallback);
+}
+  
+button, a {
+    font-family: "Share Tech Mono", var(--font-fallback);
+
+}
+
+p {
+  @apply text-lg;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  @apply font-bold;
+  font-family: "Big Shoulders Inline Text", sans-serif;
+}
+
+body::before{
+  content: "";
+  display: block;
+  background-image: url(/noise.webp);
+  opacity: .4;
+  background-repeat: repeat;
+  background-size: 257px auto;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.btn--primary {
+  @apply border py-2 px-2 md:px-4 text-white bg-primary border-primary;
+}
+
+.text-gradient {
+  @apply text-transparent bg-clip-text bg-gradient-to-r from-accent to-secondary;
+}
+
+.container {
+  @apply px-8 2xl:px-4;
+}
+
+.heading {
+  @apply text-5xl md:text-7xl;
+}
+
+.body-text {
+  @apply prose text-light text-lg;
+}
+
+.body-text a {
+  @apply font-sans text-light;
+}

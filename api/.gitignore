@@ -1,0 +1,7 @@
+__pycache__
+static/datasets/*
+static/temp/*
+_sample-data/generated/*
+!static/datasets/.gitkeep
+!static/temp/.gitkeep
+!_sample-data/generated/.gitkeep

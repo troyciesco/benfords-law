@@ -1,0 +1,72 @@
+version: "3.8"
+services:
+  web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile.web.dev
+    ports:
+      - 3000:3000
+      - 24678:24678
+    volumes:
+      - ./web:/frontend
+      - /frontend/node_modules
+    depends_on:
+      - api
+    environment:
+      - NUXT_PUBLIC_API_BASE=http://api:5001
+      - NUXT_PUBLIC_API_BROWSER_BASE=http://localhost:5001
+  web-local-build:
+    build:
+      context: ./web
+      dockerfile: Dockerfile.web.local-build
+    ports:
+      - 3001:3001
+    depends_on:
+      - api-local-build
+    environment:
+      - NUXT_PUBLIC_API_BASE=http://api-local-build:5002
+      - NUXT_PUBLIC_API_BROWSER_BASE=http://localhost:5002
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile.api.dev
+    ports:
+      - 5001:5001
+    volumes:
+      - ./api:/app
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - DATABASE_URL=postgresql://postgres:password@db:5432/blv
+      - CORS_ORIGINS=["http://localhost:3000"]
+
+  api-local-build:
+    build:
+      context: ./api
+      dockerfile: Dockerfile.api.local-build
+    ports:
+      - 5002:5002
+    volumes:
+      - ./api:/app
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - DATABASE_URL=postgresql://postgres:password@db:5432/blv
+      - CORS_ORIGINS=["http://localhost:3001"]
+
+  db:
+    image: postgres:13
+    ports:
+      - 5432:5432
+    volumes:
+      - ./db_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=blv
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      retries: 5
